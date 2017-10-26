@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import pillapp.PrefManager;
 import teamqitalach.pillapp.R;
 
 import pillapp.Model.Alarm;
@@ -82,8 +83,11 @@ public class AddActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("Actualizando alarmas");
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
+
+        PrefManager prefManager = new PrefManager(this);
+        String u = prefManager.getEmail();
         Request request = new Request.Builder()
-                .url("http://10.0.2.2:8080/usuario/user/Romeo")
+                .url("http://10.0.2.2:8080/usuario/user/"+u)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
